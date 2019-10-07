@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Карта</string>
     <string name="action_settings">Настройки</string>
+    <string name="hw">Здаров, Мир!</string>
 </resources>
