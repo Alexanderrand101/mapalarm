@@ -1,6 +1,7 @@
 package com.matmik.mapalarm.android
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +23,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        resetTitle()
         this.applicationContext.resources.configuration
+        this.baseContext.resources.configuration
+        val string = getString(R.string.hw);
         fab.setOnClickListener(this)
+    }
+
+    fun resetTitle(){
+        val info = packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA)
+        if (info.labelRes != 0)
+            setTitle(info.labelRes);
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

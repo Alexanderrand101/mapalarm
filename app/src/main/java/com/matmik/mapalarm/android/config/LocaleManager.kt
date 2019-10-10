@@ -1,10 +1,12 @@
 package com.matmik.mapalarm.android.config
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
+import android.os.Build.VERSION_CODES.N
 import android.os.LocaleList
 import android.preference.PreferenceManager
 import java.util.*
@@ -75,6 +77,7 @@ object LocaleManager {
         mSharedPreference!![SELECTED_LANGUAGE] = language
 
     }
+
 
     @TargetApi(17)
     fun updateResources(context: Context, language: String): Context {
