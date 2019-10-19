@@ -1,0 +1,3 @@
+package com.matmik.mapalarm.android
+
+fun Boolean.toInt(): Int = if (this) 1 else 0
