@@ -39,6 +39,7 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
             R.id.save -> {
                 alarm.name = findViewById<TextView>(R.id.name).text.toString()
+                alarm.options.clear()
                 if (findViewById<CheckBox>(R.id.monday).isChecked) alarm.options.add(Options.Monday)
                 if (findViewById<CheckBox>(R.id.tuesday).isChecked) alarm.options.add(Options.Tuesday)
                 if (findViewById<CheckBox>(R.id.wednesday).isChecked) alarm.options.add(Options.Wednesday)
