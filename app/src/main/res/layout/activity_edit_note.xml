@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditNoteActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="241dp"
+        android:layout_height="62dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="?android:attr/colorAccent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="70dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:editable="true"
+                android:focusableInTouchMode="true"
+                tools:layout_conversion_absoluteHeight="48dp"
+                tools:layout_conversion_absoluteWidth="347dp"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="347dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time"
+                tools:layout_conversion_absoluteHeight="48dp"
+                tools:layout_conversion_absoluteWidth="347dp"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="112dp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="83dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="176dp" />
+
+                    <CheckBox
+                        android:id="@+id/tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tuesday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="85dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="224dp" />
+
+                    <CheckBox
+                        android:id="@+id/wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wednesday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="106dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="272dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/thursday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="91dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="320dp" />
+
+                    <CheckBox
+                        android:id="@+id/friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/friday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="71dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="368dp" />
+
+                    <CheckBox
+                        android:id="@+id/saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saturday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="88dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="416dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sunday"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="78dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="464dp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <Switch
+                android:id="@+id/active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/active" />
+
+            <Switch
+                android:id="@+id/located"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/located" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.matmik.mapalarm.android
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -83,18 +84,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.add -> {
                 dbHelper.addAlarm(Alarm(name = "alarm$counter",
                     time = Date(System.currentTimeMillis()),
-                    options = arrayOf(Options.Monday).toList(),
+                    options = mutableListOf(Options.Monday),
                     active = true,
                     locationBound = false,
                     location = "dot$counter"))
                 counter++
             }
             R.id.update -> {
+                /*
                 val alarm = dbHelper.getAllAlarms().maxBy { it.id }
                 alarm!!.time = Date(System.currentTimeMillis())
                 alarm!!.location = "dot$counter"
                 dbHelper.updateAlarm(alarm)
                 counter++
+                */
+                val editIntent=Intent(this,EditNoteActivity::class.java)
+                editIntent.putExtra("EditableNote",dbHelper.getAllAlarms().maxBy { it.id })
+                startActivity(editIntent)
+
             }
             R.id.delete -> {
                 val id = dbHelper.getAllAlarms().map { it.id }.maxBy { it }
