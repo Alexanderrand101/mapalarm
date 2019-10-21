@@ -28,6 +28,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         val COL_ACTIVE = "active"
         val COL_LOCATION_BOUND = "location_bound"
         val COL_LOCATION = "location"
+        var COL_DESCRIPTION = "description"
         val SCRIPT_CREATE = "CREATE TABLE $TABLE_NAME (" +
                 "$COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COL_NAME TEXT NOT NULL, " +
@@ -36,6 +37,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
                 "$COL_ACTIVE INTEGER NOT NULL, " +
                 "$COL_LOCATION_BOUND INTEGER NOT NULL, " +
                 "$COL_LOCATION TEXT NOT NULL" +
+                "$COL_DESCRIPTION TEXT NOT NULL" +
                 ");"
         val SCRIPT_DROP = "DROP TABLE $TABLE_NAME;"
         val SCRIPT_GET = "SELECT * FROM $TABLE_NAME WHERE $COL_ID = ?;"
@@ -72,6 +74,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         alarmValues.put(COL_ACTIVE, alarm.active.toInt())
         alarmValues.put(COL_LOCATION_BOUND, alarm.locationBound.toInt())
         alarmValues.put(COL_LOCATION, alarm.location)
+        alarmValues.put(COL_DESCRIPTION, alarm.description)
         db.insert(TABLE_NAME, null, alarmValues)
     }
 
@@ -84,6 +87,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         alarmValues.put(COL_ACTIVE, alarm.active.toInt())
         alarmValues.put(COL_LOCATION_BOUND, alarm.locationBound.toInt())
         alarmValues.put(COL_LOCATION, alarm.location)
+        alarmValues.put(COL_DESCRIPTION, alarm.description)
         db.update(TABLE_NAME, alarmValues, "$COL_ID = ?", arrayOf(alarm.id.toString()))
     }
 

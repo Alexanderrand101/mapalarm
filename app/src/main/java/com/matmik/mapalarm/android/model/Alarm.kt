@@ -11,4 +11,5 @@ data class Alarm (
     var options: MutableList<Options>,
     var active:Boolean = true,
     var locationBound: Boolean = false,
-    var location: String = ""): Serializable
+    var location: String = "",
+    var description: String = ""): Serializable
