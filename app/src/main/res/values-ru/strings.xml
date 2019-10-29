@@ -12,4 +12,5 @@
     <string name="sunday">Воскресенье</string>
     <string name="active">Активность</string>
     <string name="located">Геопривязка</string>
+    <string name="time">Время</string>
 </resources>

@@ -17,7 +17,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
 
     companion object{
         val DB_NAME = "MapAlarm.db"
-        val DB_VERSION = 1
+        val DB_VERSION = 3
         val SEPARATOR = "|"
         val NOT_FOUND_MSG = "alarm with id = %d not found"
         val TABLE_NAME = "alarms"
@@ -36,7 +36,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
                 "$COL_OPTIONS TEXT NOT NULL, " +
                 "$COL_ACTIVE INTEGER NOT NULL, " +
                 "$COL_LOCATION_BOUND INTEGER NOT NULL, " +
-                "$COL_LOCATION TEXT NOT NULL" +
+                "$COL_LOCATION TEXT NOT NULL, " +
                 "$COL_DESCRIPTION TEXT NOT NULL" +
                 ");"
         val SCRIPT_DROP = "DROP TABLE $TABLE_NAME;"

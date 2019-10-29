@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun resetTitle(){
         val info = packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA)
         if (info.labelRes != 0)
-            setTitle(info.labelRes);
+            setTitle(info.labelRes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     options = mutableListOf(Options.Monday),
                     active = true,
                     locationBound = false,
-                    location = "dot$counter"))
+                    location = "dot$counter",
+                    description = ""))
                 counter++
             }
             R.id.update -> {

@@ -18,6 +18,7 @@ import java.util.*
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import kotlinx.android.synthetic.main.activity_edit_note.*
 import java.text.DateFormat
 
 
@@ -47,6 +48,8 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
     private lateinit var sunday: CheckBox
 
+    private lateinit var description: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
@@ -69,6 +72,8 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
         sunday = findViewById<CheckBox>(R.id.sunday)
 
+        description=findViewById(R.id.description)
+
 
 
 
@@ -88,6 +93,8 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
         findViewById<Switch>(R.id.active).isChecked = alarm.active
         findViewById<Switch>(R.id.located).isChecked = alarm.locationBound
+
+        description.setText(alarm.description)
     }
 
     override fun onClick(p0: View?) {
@@ -108,10 +115,13 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
                 alarm.time=SimpleDateFormat("HH : mm").parse(time.text.toString())
 
 
+
                 alarm.active = findViewById<Switch>(R.id.active).isChecked
                 alarm.locationBound = findViewById<Switch>(R.id.located).isChecked
+
+                alarm.description=description.text.toString()
                 dbHelper.updateAlarm(alarm)
-                val editIntent= Intent(this,MainActivity::class.java)
+                val editIntent = Intent(this,MainActivity::class.java)
                 startActivity(editIntent)
             }
             R.id.time ->{
