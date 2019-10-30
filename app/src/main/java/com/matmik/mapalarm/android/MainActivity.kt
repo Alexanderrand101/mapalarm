@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.matmik.mapalarm.android.config.LocaleManager
+import com.matmik.mapalarm.android.custom.AlarmCard
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
@@ -113,10 +115,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun refreshTb(){
-        val view = findViewById<TextView>(R.id.output)
+        /*val view = findViewById<TextView>(R.id.output)
         var text = ""
         for (alarm in dbHelper.getAllAlarms())
             text += alarm.toString() + "\n"
-        view.text = text
+        view.text = text*/
+        val layout = findViewById<LinearLayout>(R.id.lineartest)
+        layout.removeAllViews()
+        for (alarm in dbHelper.getAllAlarms()){
+            val alarmCard = AlarmCard(alarm, this.baseContext)
+            alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
+            layout.addView(alarmCard)
+        }
     }
 }
