@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val layout = findViewById<LinearLayout>(R.id.lineartest)
         layout.removeAllViews()
         for (alarm in dbHelper.getAllAlarms()){
-            val alarmCard = AlarmCard(alarm, this.baseContext)
+            val alarmCard = AlarmCard(alarm, this)
             alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
             layout.addView(alarmCard)
         }
