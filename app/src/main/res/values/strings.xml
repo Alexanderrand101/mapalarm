@@ -12,4 +12,6 @@
     <string name="active">Activity</string>
     <string name="located">Is located</string>
     <string name="time">Time</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
 </resources>

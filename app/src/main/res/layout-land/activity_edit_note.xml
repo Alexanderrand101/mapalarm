@@ -15,6 +15,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:src="@android:drawable/ic_menu_edit"
         app:layout_anchor="@+id/scrollView2"
         app:layout_anchorGravity="end|bottom" />
 
@@ -90,7 +91,7 @@
 
                     <CheckBox
                         android:id="@+id/monday"
-                        android:layout_width="wrap_content"
+                        android:layout_width="213dp"
                         android:layout_height="wrap_content"
                         android:text="@string/monday"
                         tools:layout_conversion_absoluteHeight="32dp"
@@ -100,7 +101,7 @@
 
                     <CheckBox
                         android:id="@+id/tuesday"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:text="@string/tuesday"
                         tools:layout_conversion_absoluteHeight="32dp"
@@ -110,7 +111,7 @@
 
                     <CheckBox
                         android:id="@+id/wednesday"
-                        android:layout_width="wrap_content"
+                        android:layout_width="445dp"
                         android:layout_height="wrap_content"
                         android:text="@string/wednesday"
                         tools:layout_conversion_absoluteHeight="32dp"
@@ -193,7 +194,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="214dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="16pt"
                 android:layout_marginTop="8pt"
                 android:layout_marginRight="16pt"
@@ -203,7 +204,7 @@
                     android:id="@+id/description"
                     style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="204dp"
+                    android:layout_height="140dp"
                     android:capitalize="sentences"
                     android:ems="10"
                     android:gravity="start|top"

@@ -13,4 +13,6 @@
     <string name="active">Активность</string>
     <string name="located">Геопривязка</string>
     <string name="time">Время</string>
+    <string name="name">Имя</string>
+    <string name="description">Описание</string>
 </resources>

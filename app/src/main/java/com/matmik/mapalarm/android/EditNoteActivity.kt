@@ -31,7 +31,7 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
     private var mMinute: Int = 0
 
 
-    private lateinit var name: TextView
+    private lateinit var name: EditText
     private lateinit var time :EditText
 
     private lateinit var monday: CheckBox
@@ -79,7 +79,7 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
         dbHelper = DbHelper(this)
         alarm = intent.getSerializableExtra("EditableNote") as Alarm
-        name.text = alarm.name
+        name.setText(alarm.name)
         time.setOnClickListener(this)
         time.setText(SimpleDateFormat("HH : mm").format(alarm.time))
 
@@ -112,19 +112,22 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
                 if (sunday.isChecked) alarm.options.add(Options.Sunday)
 
 
-                alarm.time=SimpleDateFormat("HH : mm").parse(time.text.toString())
+                alarm.time = SimpleDateFormat("HH : mm").parse(time.text.toString())
 
 
 
                 alarm.active = findViewById<Switch>(R.id.active).isChecked
                 alarm.locationBound = findViewById<Switch>(R.id.located).isChecked
 
-                alarm.description=description.text.toString()
-                dbHelper.updateAlarm(alarm)
-                val editIntent = Intent(this,MainActivity::class.java)
+                alarm.description = description.text.toString()
+                if (alarm.id >= 0)
+                    dbHelper.updateAlarm(alarm)
+                else
+                    dbHelper.addAlarm(alarm)
+                val editIntent = Intent(this, MainActivity::class.java)
                 startActivity(editIntent)
             }
-            R.id.time ->{
+            R.id.time -> {
                 callTimePicker()
             }
         }
