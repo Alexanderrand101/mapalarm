@@ -10,21 +10,12 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="47dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
-    </com.google.android.material.appbar.AppBarLayout>
+        android:theme="@style/AppTheme.AppBarOverlay"/>
 
     <include
         layout="@layout/content_main"
-        android:layout_width="360dp"
-        android:layout_height="641dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

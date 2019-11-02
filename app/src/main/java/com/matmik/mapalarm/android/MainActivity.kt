@@ -3,6 +3,7 @@ package com.matmik.mapalarm.android
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.matmik.mapalarm.android.config.LocaleManager
 import com.matmik.mapalarm.android.custom.AlarmCard
+import com.matmik.mapalarm.android.custom.AlarmListFragment
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         add.setOnClickListener(this)
         update.setOnClickListener(this)
         delete.setOnClickListener(this)
-        refreshTb()
+        //refreshTb()
     }
 
     fun resetTitle(){
@@ -110,6 +112,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val id = dbHelper.getAllAlarms().map { it.id }.maxBy { it }
                 dbHelper.deleteAlarm(id!!)
             }
+            R.id.imageButton ->{
+                AlarmListFragment().show(supportFragmentManager, "dialog")
+            }
         }
         refreshTb()
     }
@@ -120,12 +125,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         for (alarm in dbHelper.getAllAlarms())
             text += alarm.toString() + "\n"
         view.text = text*/
-        val layout = findViewById<LinearLayout>(R.id.lineartest)
+        /*val layout = findViewById<LinearLayout>(R.id.lineartest)
         layout.removeAllViews()
         for (alarm in dbHelper.getAllAlarms()){
             val alarmCard = AlarmCard(alarm, this)
             alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
             layout.addView(alarmCard)
+        }*/
+        if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            val alarmListFragment =
+                supportFragmentManager.findFragmentById(R.id.alarm_list_fragment) as AlarmListFragment
+            alarmListFragment.refreshTb()
         }
     }
 }
