@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.DialogFragment
 import com.matmik.mapalarm.android.config.LocaleManager
 import com.matmik.mapalarm.android.custom.AlarmCard
 import com.matmik.mapalarm.android.custom.AlarmListFragment
@@ -43,10 +44,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         this.applicationContext.resources.configuration
         this.baseContext.resources.configuration
         val string = getString(R.string.hw);*/
-        fab.setOnClickListener(this)
-        add.setOnClickListener(this)
-        update.setOnClickListener(this)
-        delete.setOnClickListener(this)
+        //fab.setOnClickListener(this)
+        //add.setOnClickListener(this)
+        //update.setOnClickListener(this)
+        //delete.setOnClickListener(this)
         //refreshTb()
     }
 
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
 
-            R.id.fab -> {
+           //R.id.fab -> {
                 //LocaleManagerMew.setLocale(this@LoginCustomerFragment.activity?.applicationContext)
                 /*var mCurrentLanguage = LocaleManager.getCurrentLanguage(this.applicationContext)
                 if (mCurrentLanguage == LocaleManager.mRussianFlag) {
@@ -84,36 +85,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     LocaleManager.setNewLocale(this.applicationContext, LocaleManager.mRussianFlag)
                 }
                 this.recreate()*/
-            }
-            R.id.add -> {
-                dbHelper.addAlarm(Alarm(name = "alarm$counter",
+            //}
+            R.id.add_alarm_btn -> {
+                /*dbHelper.addAlarm(Alarm(name = "alarm$counter",
                     time = Date(System.currentTimeMillis()),
                     options = mutableListOf(Options.Monday),
                     active = true,
                     locationBound = false,
                     location = "dot$counter",
                     description = ""))
-                counter++
+                counter++*/
+                val editIntent = Intent(this, EditNoteActivity::class.java)
+                editIntent.putExtra("EditableNote", Alarm(name = "new Alarm",
+                    time = Date(System.currentTimeMillis()),
+                    options = mutableListOf(Options.Monday)))
+                startActivity(editIntent)
             }
-            R.id.update -> {
-                /*
-                val alarm = dbHelper.getAllAlarms().maxBy { it.id }
-                alarm!!.time = Date(System.currentTimeMillis())
-                alarm!!.location = "dot$counter"
-                dbHelper.updateAlarm(alarm)
-                counter++
-                */
-                val editIntent=Intent(this,EditNoteActivity::class.java)
+            /*R.id.update -> {
+                /*val editIntent=Intent(this,EditNoteActivity::class.java)
                 editIntent.putExtra("EditableNote",dbHelper.getAllAlarms().maxBy { it.id })
                 startActivity(editIntent)
 
-            }
-            R.id.delete -> {
+            }*/
+            /*R.id.delete -> {
                 val id = dbHelper.getAllAlarms().map { it.id }.maxBy { it }
                 dbHelper.deleteAlarm(id!!)
-            }
+            }*/*/
             R.id.imageButton ->{
-                AlarmListFragment().show(supportFragmentManager, "dialog")
+                val dialog = AlarmListFragment()
+                dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme)
+                dialog.show(supportFragmentManager, "dialog")
             }
         }
         refreshTb()

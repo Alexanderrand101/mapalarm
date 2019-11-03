@@ -107,7 +107,8 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
             cursor.getString(cursor.getColumnIndex(COL_OPTIONS)).split(SEPARATOR).map{Options.valueOf(it)} as MutableList<Options>,
             cursor.getInt(cursor.getColumnIndex(COL_ACTIVE)) == 1,
             cursor.getInt(cursor.getColumnIndex(COL_LOCATION_BOUND)) == 1,
-            cursor.getString(cursor.getColumnIndex((COL_LOCATION)))
+            cursor.getString(cursor.getColumnIndex((COL_LOCATION))),
+            cursor.getString(cursor.getColumnIndex(COL_DESCRIPTION))
         )
     }
 

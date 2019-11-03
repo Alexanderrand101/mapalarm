@@ -6,32 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="47dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <include
         layout="@layout/content_main"
-        android:layout_width="360dp"
-        android:layout_height="641dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
