@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +43,7 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
         val alarmNameBox = findViewById<TextView>(R.id.alarm_name)
         val alarmTimeBox = findViewById<TextView>(R.id.alarm_time)
         val alarmIsActiveSwitch = findViewById<Switch>(R.id.alarm_active_btn)
+        val locationBound=findViewById<ImageButton>(R.id.snap_to_location_btn)
         dbHelper = DbHelper(context!!)
         alarmNameBox.text = alarm.name;
         alarmTimeBox.text = alarm.time.hours.toString() + ":" + alarm.time.minutes.toString()
@@ -49,5 +51,7 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
         alarm_active_btn.setOnClickListener(this)
         delete_alarm_btn.setOnClickListener(this)
         edit_alarm_btn.setOnClickListener(this)
+        if (alarm.locationBound) locationBound.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_location_on))
+        else locationBound.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_location_off))
     }
 }

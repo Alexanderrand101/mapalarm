@@ -14,8 +14,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:foreground="@drawable/ic_baseline_check"
         android:onClick="onClick"
-        android:src="@android:drawable/ic_menu_edit"
+        android:scaleType="fitCenter"
         app:layout_anchor="@+id/scrollView2"
         app:layout_anchorGravity="end|bottom" />
 
