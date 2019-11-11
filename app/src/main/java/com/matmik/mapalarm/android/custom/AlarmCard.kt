@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import com.matmik.mapalarm.android.EditNoteActivity
 import com.matmik.mapalarm.android.R
+import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import kotlinx.android.synthetic.main.alarm_card_content.view.*
@@ -23,14 +24,14 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.delete_alarm_btn ->{
-                dbHelper.deleteAlarm(alarm)
+                MapAlarmManager.deleteAndUnschedule(v.context.applicationContext, alarm, dbHelper)
                 refreshableContainer.refreshTb()
             }
-            R.id.alarm_active_btn->{
+            R.id.alarm_active_btn ->{
                 alarm.active = !alarm.active
-                dbHelper.updateAlarm(alarm)
+                MapAlarmManager.updateAndSchedule(v.context.applicationContext, alarm, dbHelper)
             }
-            R.id.edit_alarm_btn->{
+            R.id.edit_alarm_btn ->{
                 val editIntent = Intent(v.context, EditNoteActivity::class.java)
                 editIntent.putExtra("EditableNote",alarm)
                 startActivity(v.context, editIntent, null)

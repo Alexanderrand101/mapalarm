@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 counter++*/
                 val editIntent = Intent(this, EditNoteActivity::class.java)
                 editIntent.putExtra("EditableNote", Alarm(name = "new Alarm",
-                    time = Date(System.currentTimeMillis()),
+                    time = Date(0),
                     options = mutableListOf(Options.Monday)))
                 startActivity(editIntent)
             }

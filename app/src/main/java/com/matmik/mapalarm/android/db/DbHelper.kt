@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
 import com.matmik.mapalarm.android.toInt
@@ -17,7 +18,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
 
     companion object{
         val DB_NAME = "MapAlarm.db"
-        val DB_VERSION = 3
+        val DB_VERSION = 4
         val SEPARATOR = "|"
         val NOT_FOUND_MSG = "alarm with id = %d not found"
         val TABLE_NAME = "alarms"
@@ -53,7 +54,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         onCreate(db)
     }
 
-    fun getAlarm(id: Int): Alarm{
+    fun getAlarm(id: Long): Alarm{
         val db = this.readableDatabase
         val cursor = db.rawQuery(SCRIPT_GET, arrayOf(id.toString()))
         if(cursor.moveToFirst()){
@@ -65,7 +66,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
 
     }
 
-    fun addAlarm(alarm: Alarm){
+    fun addAlarm(alarm: Alarm): Long{
         val db = this.writableDatabase
         val alarmValues = ContentValues()
         alarmValues.put(COL_NAME, alarm.name)
@@ -75,7 +76,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         alarmValues.put(COL_LOCATION_BOUND, alarm.locationBound.toInt())
         alarmValues.put(COL_LOCATION, alarm.location)
         alarmValues.put(COL_DESCRIPTION, alarm.description)
-        db.insert(TABLE_NAME, null, alarmValues)
+        return db.insert(TABLE_NAME, null, alarmValues)
     }
 
     fun updateAlarm(alarm: Alarm){
@@ -91,7 +92,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         db.update(TABLE_NAME, alarmValues, "$COL_ID = ?", arrayOf(alarm.id.toString()))
     }
 
-    fun deleteAlarm(id: Int){
+    fun deleteAlarm(id: Long){
         val db = this.writableDatabase
         db.delete(TABLE_NAME, "$COL_ID = ?", arrayOf(id.toString()))
     }
@@ -101,7 +102,7 @@ class DbHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VE
     }
 
     private fun parseCursor(cursor: Cursor): Alarm{
-        return Alarm(cursor.getInt(cursor.getColumnIndex(COL_ID)),
+        return Alarm(cursor.getLong(cursor.getColumnIndex(COL_ID)),
             cursor.getString(cursor.getColumnIndex(COL_NAME)),
             Date(cursor.getLong(cursor.getColumnIndex(COL_TIME))),
             cursor.getString(cursor.getColumnIndex(COL_OPTIONS)).split(SEPARATOR).map{Options.valueOf(it)} as MutableList<Options>,

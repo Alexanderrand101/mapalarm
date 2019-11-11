@@ -5,7 +5,7 @@ import java.util.*
 
 
 data class Alarm (
-    var id: Int = -1,
+    var id: Long = -1,
     var name: String,
     var time: Date,
     var options: MutableList<Options>,

@@ -18,6 +18,7 @@ import java.util.*
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import kotlinx.android.synthetic.main.activity_edit_note.*
 import java.text.DateFormat
 
@@ -94,7 +95,7 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
         findViewById<Switch>(R.id.active).isChecked = alarm.active
         findViewById<Switch>(R.id.located).isChecked = alarm.locationBound
 
-        description.setText(alarm.description)
+        description.setText(alarm.time.toString())
     }
 
     override fun onClick(p0: View?) {
@@ -121,9 +122,11 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
                 alarm.description = description.text.toString()
                 if (alarm.id >= 0)
-                    dbHelper.updateAlarm(alarm)
+                    //dbHelper.updateAlarm(alarm)
+                    MapAlarmManager.updateAndSchedule(this.applicationContext, alarm, dbHelper)
                 else
-                    dbHelper.addAlarm(alarm)
+                    //dbHelper.addAlarm(alarm)
+                    MapAlarmManager.addAndSchedule(this.applicationContext, alarm, dbHelper)
                 val editIntent = Intent(this, MainActivity::class.java)
                 startActivity(editIntent)
             }

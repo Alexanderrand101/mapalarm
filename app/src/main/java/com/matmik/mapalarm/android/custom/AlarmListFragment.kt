@@ -40,7 +40,7 @@ class AlarmListFragment: DialogFragment(),RefreshableContainer{
         layout.removeAllViews()
         for (alarm in dbHelper.getAllAlarms()){
             val alarmCard = AlarmCard(alarm, this, activity)
-            alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300)
+            alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { bottomMargin = 8 }
             layout.addView(alarmCard)
         }
     }
