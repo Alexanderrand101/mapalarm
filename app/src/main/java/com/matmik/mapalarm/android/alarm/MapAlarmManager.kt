@@ -53,7 +53,15 @@ object MapAlarmManager {
 
     fun scheduleAllTodayAlarms(context: Context, dbHelper: DbHelper){
         val alarmList = dbHelper.getAllAlarms()
-        alarmList.filter { it.evaluateAlarm(context) }.forEach { schedule(context, it) }
+        val calendar = Calendar.getInstance()
+        if (calendar.get(Calendar.HOUR_OF_DAY) == 23 && calendar.get(Calendar.MINUTE) == 59){
+            calendar.add(Calendar.DAY_OF_WEEK, 1)
+            val option = Options.calendarDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK))
+            alarmList.filter { it.active && it.options.contains(option) }.forEach { schedule(context, it) }
+        }
+        else{
+            alarmList.filter { it.evaluateAlarm(context) }.forEach { schedule(context, it) }
+        }
     }
 
     fun Alarm.evaluateAlarm(context: Context): Boolean {
