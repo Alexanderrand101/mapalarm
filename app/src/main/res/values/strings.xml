@@ -14,4 +14,12 @@
     <string name="time">Time</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="loading">loading</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

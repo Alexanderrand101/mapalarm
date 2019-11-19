@@ -15,4 +15,12 @@
     <string name="time">Время</string>
     <string name="name">Имя</string>
     <string name="description">Описание</string>
+    <string name="loading">Загрузка</string>
+    <string name="auth_failed">Ошибка аутентификации</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="verify_email">Потвердить почту</string>
+    <string name="create_account">Регистрация</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_out">Выйти</string>
 </resources>

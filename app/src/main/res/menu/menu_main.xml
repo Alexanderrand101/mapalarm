@@ -2,9 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.matmik.mapalarm.android.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/action_settings"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/action_settings"-->
+<!--        app:showAsAction="never" />-->
+
+        <item
+            android:id="@+id/signOutButton"
+            android:title="@string/sign_out"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
+<!--            android:layout_marginStart="@dimen/button_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/button_horizontal_margin"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.0"-->
+
 </menu>
