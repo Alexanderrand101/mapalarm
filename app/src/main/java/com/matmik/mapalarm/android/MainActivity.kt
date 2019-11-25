@@ -13,12 +13,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.matmik.mapalarm.android.config.LocaleManager
 import com.matmik.mapalarm.android.custom.AlarmCard
 import com.matmik.mapalarm.android.custom.AlarmListFragment
@@ -26,6 +28,7 @@ import com.matmik.mapalarm.android.custom.MapFragment
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
+import com.matmik.mapalarm.android.ui.login.LoginActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -79,7 +82,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.signOutButton -> {
+                FirebaseAuth.getInstance().signOut()
+                val start = Intent(this, LoginActivity::class.java)
+                startActivity(start)
+                true}
+//            R.id.verifyEmailButton -> {
+//                FirebaseAuth.getInstance().signOut()
+//                val start = Intent(this, LoginActivity::class.java)
+//                startActivity(start)
+//                true}
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -126,6 +138,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val dialog = AlarmListFragment()
                 dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme)
                 dialog.show(supportFragmentManager, "dialog")
+            }
+            R.id.imageButton2 -> {
+                openOptionsMenu()
             }
         }
         refreshTb()
