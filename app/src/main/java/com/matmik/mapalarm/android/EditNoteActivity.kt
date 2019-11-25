@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import kotlinx.android.synthetic.main.activity_edit_note.*
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.OverlayItem
 import java.text.DateFormat
 
 
@@ -96,6 +98,8 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
         findViewById<Switch>(R.id.located).isChecked = alarm.locationBound
 
         description.setText(alarm.time.toString())
+        location.setText(alarm.location)
+
     }
 
     override fun onClick(p0: View?) {
@@ -124,9 +128,13 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
                 if (alarm.id >= 0)
                     //dbHelper.updateAlarm(alarm)
                     MapAlarmManager.updateAndSchedule(this.applicationContext, alarm, dbHelper)
-                else
+                else {
                     //dbHelper.addAlarm(alarm)
-                    MapAlarmManager.addAndSchedule(this.applicationContext, alarm, dbHelper)
+                    alarm = MapAlarmManager.addAndSchedule(this.applicationContext, alarm, dbHelper)
+                }
+                val latid = alarm.location.split(",")[0].toDouble()
+                val longt = alarm.location.split(",")[1].toDouble()
+                GlobalVariables.items.add(OverlayItem(alarm.id.toString(), alarm.name, alarm.description, GeoPoint(latid, longt)))
                 val editIntent = Intent(this, MainActivity::class.java)
                 startActivity(editIntent)
             }

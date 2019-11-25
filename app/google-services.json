@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "401014736053",
+    "firebase_url": "https://mapalarm-ee12a.firebaseio.com",
+    "project_id": "mapalarm-ee12a",
+    "storage_bucket": "mapalarm-ee12a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401014736053:android:1c32b14d46d5491bb5aafc",
+        "android_client_info": {
+          "package_name": "com.matmik.mapalarm.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401014736053-v1v6g4j158g3f7umfhufrdaurn6tca7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChfRTviZf4YUuZ3o3bxt2JZGBhvUxM0pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401014736053-v1v6g4j158g3f7umfhufrdaurn6tca7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

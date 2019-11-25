@@ -83,9 +83,10 @@ object MapAlarmManager {
             schedule(context, alarm)
     }
 
-    fun addAndSchedule(context: Context, alarm: Alarm, dbHelper: DbHelper){
+    fun addAndSchedule(context: Context, alarm: Alarm, dbHelper: DbHelper):Alarm{
         var insertedAlaram = dbHelper.getAlarm(dbHelper.addAlarm(alarm))
         rescheduleAlarm(context, insertedAlaram)
+        return insertedAlaram
     }
 
     fun updateAndSchedule(context: Context, alarm: Alarm, dbHelper: DbHelper){

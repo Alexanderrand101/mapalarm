@@ -1,5 +1,7 @@
 package com.matmik.mapalarm.android
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,11 +14,15 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.matmik.mapalarm.android.config.LocaleManager
 import com.matmik.mapalarm.android.custom.AlarmCard
 import com.matmik.mapalarm.android.custom.AlarmListFragment
+import com.matmik.mapalarm.android.custom.MapFragment
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
@@ -40,6 +46,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         //setSupportActionBar(toolbar)
         dbHelper = DbHelper(this)
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        }
         /*resetTitle()
         this.applicationContext.resources.configuration
         this.baseContext.resources.configuration
@@ -137,6 +148,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val alarmListFragment =
                 supportFragmentManager.findFragmentById(R.id.alarm_list_fragment) as AlarmListFragment
             alarmListFragment.refreshTb()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            0 -> {
+                if((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
+                    val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment
+                    mapFragment.centerOnMe()
+                } else {
+                    Toast.makeText(this, "location based alarm won't work", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
