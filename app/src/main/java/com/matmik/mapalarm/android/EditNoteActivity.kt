@@ -1,28 +1,22 @@
 package com.matmik.mapalarm.android
 
+import android.app.TimePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
-import java.text.SimpleDateFormat
-import android.widget.TimePicker
-import android.app.TimePickerDialog
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import java.util.*
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import kotlinx.android.synthetic.main.activity_edit_note.*
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.OverlayItem
-import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
@@ -77,8 +71,16 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
 
         description=findViewById(R.id.description)
 
+        findViewById<TextView>(R.id.location).isClickable=findViewById<Switch>(R.id.located).isChecked
+        if(!findViewById<Switch>(R.id.located).isChecked) findViewById<TextView>(R.id.location).setTextColor(
+            Color.GRAY) else findViewById<TextView>(R.id.location).setTextColor(Color.BLACK)
 
 
+        findViewById<Switch>(R.id.located).setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
+            findViewById<TextView>(R.id.location).isClickable=findViewById<Switch>(R.id.located).isChecked
+            if(!findViewById<Switch>(R.id.located).isChecked) findViewById<TextView>(R.id.location).setTextColor(
+                Color.GRAY) else findViewById<TextView>(R.id.location).setTextColor(Color.BLACK)
+        }
 
         dbHelper = DbHelper(this)
         alarm = intent.getSerializableExtra("EditableNote") as Alarm
@@ -140,6 +142,9 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
             }
             R.id.time -> {
                 callTimePicker()
+            }
+            R.id.location ->{
+                println("ЭЭЭЭ")
             }
         }
 

@@ -9,6 +9,7 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.matmik.mapalarm.android.EditNoteActivity
@@ -31,29 +32,27 @@ import java.util.*
 import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
-class MapFragment:Fragment() {
+class MapFragment : Fragment() {
 
     var map: MapView? = null
     var mLocationOverlay: MyLocationNewOverlay? = null
     var counter: Int = 0;
     val handler = Handler()
-    var lastLoc:GeoPoint? = null
-    val runnableCenter = object : Runnable{
+    var lastLoc: GeoPoint? = null
+    val runnableCenter = object : Runnable {
         override fun run() {
-            synchronized(counter){
+            synchronized(counter) {
                 counter++
                 if (mLocationOverlay!!.myLocation != null) {
                     lastLoc = mLocationOverlay!!.myLocation
                     map!!.controller!!.setCenter(mLocationOverlay!!.myLocation)
-                }
-                else {
+                } else {
                     if (counter < 5) {
                         handler.postDelayed(this, 1000)
-                    }
-                    else{
+                    } else {
                         if (lastLoc != null) {
                             map!!.controller!!.setCenter(lastLoc)
-                        } else{
+                        } else {
 
                         }
                     }
@@ -74,35 +73,44 @@ class MapFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.map_fragment, container,false)
+        return inflater.inflate(R.layout.map_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(savedInstanceState != null && savedInstanceState!!.containsKey("lastlat")){
-            lastLoc = GeoPoint(savedInstanceState.getDouble("lastlat"),
-                savedInstanceState.getDouble("lastlong"))
+        if (savedInstanceState != null && savedInstanceState!!.containsKey("lastlat")) {
+            lastLoc = GeoPoint(
+                savedInstanceState.getDouble("lastlat"),
+                savedInstanceState.getDouble("lastlong")
+            )
         }
         map = view!!.findViewById<MapView>(R.id.map)
         map!!.setTileSource(TileSourceFactory.MAPNIK)
-        map!!.setBuiltInZoomControls(true)
+        map!!.setBuiltInZoomControls(false)
         map!!.setMultiTouchControls(true)
         val mapController = map!!.controller
         mapController.setZoom(16)
 
+        view!!.findViewById<ImageButton>(R.id.plusButton).setOnClickListener(View.OnClickListener { mapController.zoomIn() })
+        view!!.findViewById<ImageButton>(R.id.minusButton).setOnClickListener(View.OnClickListener { mapController.zoomOut() })
+        view!!.findViewById<ImageButton>(R.id.gpsButton).setOnClickListener(View.OnClickListener { center() })
+
         val startPoint = GeoPoint(53.198627, 50.113987)//mLocationOverlay!!.myLocation
         mapController.setCenter(startPoint)
-        val mRecive = object : MapEventsReceiver{
+        val mRecive = object : MapEventsReceiver {
             override fun longPressHelper(p: GeoPoint?): Boolean {
                 return false
             }
 
             override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
                 val editIntent = Intent(view!!.context, EditNoteActivity::class.java)
-                editIntent.putExtra("EditableNote", Alarm(name = "new Alarm",
-                    time = Date(0),
-                    options = mutableListOf(Options.Monday),
-                    location = p!!.toString())
+                editIntent.putExtra(
+                    "EditableNote", Alarm(
+                        name = "new Alarm",
+                        time = Date(0),
+                        options = mutableListOf(Options.Monday),
+                        location = p!!.toString()
+                    )
                 )
                 startActivity(editIntent)
                 return false
@@ -110,7 +118,7 @@ class MapFragment:Fragment() {
 
         }
         map!!.overlays.add(MapEventsOverlay(mRecive))
-        val obj = object: ItemizedIconOverlay.OnItemGestureListener<OverlayItem>{
+        val obj = object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
 
             override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
                 return true
@@ -125,8 +133,12 @@ class MapFragment:Fragment() {
         mOverlay.setFocusItemsOnTap(true);
         map!!.overlays.add(mOverlay)
 
-        if(ContextCompat.checkSelfPermission(this.activity!!.applicationContext, android.Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this.activity!!.applicationContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
             centerOnMe()
         }
     }
@@ -151,12 +163,12 @@ class MapFragment:Fragment() {
     }
 
 
-    private fun center(){
-        synchronized(counter){
+    private fun center() {
+        synchronized(counter) {
             counter = 0
         }
         if (mLocationOverlay!!.myLocation == null)
-            handler.postDelayed(runnableCenter,2000)
+            handler.postDelayed(runnableCenter, 2000)
         else {
             lastLoc = mLocationOverlay!!.myLocation
             map!!.controller!!.setCenter(mLocationOverlay!!.myLocation)

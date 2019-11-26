@@ -193,6 +193,16 @@
                 android:layout_marginBottom="8pt"
                 android:text="@string/located" />
 
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginRight="16pt"
+                android:layout_marginBottom="8pt"
+                android:text="TextView" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -213,7 +223,6 @@
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
     </ScrollView>
 
