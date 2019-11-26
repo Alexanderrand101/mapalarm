@@ -125,7 +125,7 @@ class PickLocationActivity : AppCompatActivity() {
         //mOverlay.setFocusItemsOnTap(true);
         //map!!.overlays.add(mOverlay)
 
-        if (alarm.location != null){
+        if (alarm.location != ""){
             val latid = alarm.location.split(",")[0].toDouble()
             val longt = alarm.location.split(",")[1].toDouble()
             val point = GeoPoint(latid, longt)
