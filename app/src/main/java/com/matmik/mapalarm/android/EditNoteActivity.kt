@@ -160,7 +160,28 @@ class EditNoteActivity : AppCompatActivity(), View.OnClickListener {
                 callTimePicker()
             }
             R.id.location -> {
-                println("ЭЭЭЭ")
+                alarm.name = name.text.toString()
+                alarm.options.clear()
+                if (monday.isChecked) alarm.options.add(Options.Monday)
+                if (tuesday.isChecked) alarm.options.add(Options.Tuesday)
+                if (wednesday.isChecked) alarm.options.add(Options.Wednesday)
+                if (thursday.isChecked) alarm.options.add(Options.Thursday)
+                if (friday.isChecked) alarm.options.add(Options.Friday)
+                if (saturday.isChecked) alarm.options.add(Options.Saturday)
+                if (sunday.isChecked) alarm.options.add(Options.Sunday)
+
+
+                alarm.time = SimpleDateFormat("HH : mm").parse(time.text.toString())
+
+
+
+                alarm.active = findViewById<Switch>(R.id.active).isChecked
+                alarm.locationBound = findViewById<Switch>(R.id.located).isChecked
+
+                alarm.description = description.text.toString()
+                val editIntent = Intent(this, PickLocationActivity::class.java)
+                editIntent.putExtra("EditableNote", alarm)
+                startActivity(editIntent)
             }
         }
 

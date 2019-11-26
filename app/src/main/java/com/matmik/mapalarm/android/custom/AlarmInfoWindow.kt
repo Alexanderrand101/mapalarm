@@ -1,9 +1,12 @@
 package com.matmik.mapalarm.android.custom
 
+import android.content.Intent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import com.matmik.mapalarm.android.EditNoteActivity
 import com.matmik.mapalarm.android.R
 import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import com.matmik.mapalarm.android.db.DbHelper
@@ -30,6 +33,11 @@ class AlarmInfoWindow(resId: Int, val refreshableContainer: RefreshableContainer
                 }
                 refreshableContainer?.refreshTb(alarm)
             }
+            R.id.edit_alarm_btn ->{
+                val editIntent = Intent(v.context, EditNoteActivity::class.java)
+                editIntent.putExtra("EditableNote",alarm)
+                ContextCompat.startActivity(v.context, editIntent, null)
+            }
         }
     }
 
@@ -37,6 +45,7 @@ class AlarmInfoWindow(resId: Int, val refreshableContainer: RefreshableContainer
         closeAllInfoWindowsOn(map)
         mView.findViewById<CardView>(R.id.info_card).setOnClickListener(this)
         mView.findViewById<ImageButton>(R.id.delete_alarm_btn).setOnClickListener(this)
+        mView.findViewById<ImageButton>(R.id.edit_alarm_btn).setOnClickListener(this)
         mView.findViewById<TextView>(R.id.alarm_name).text = alarm.name
         mView.findViewById<TextView>(R.id.alarm_time).text = alarm.time.hours.toString() + ":" + alarm.time.minutes.toString()
     }
