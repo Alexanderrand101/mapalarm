@@ -22,4 +22,5 @@
     <string name="create_account">Create Account</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
+    <string name="location">Coordinates</string>
 </resources>
