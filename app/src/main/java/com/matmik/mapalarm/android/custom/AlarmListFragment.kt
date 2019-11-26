@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.matmik.mapalarm.android.R
 import com.matmik.mapalarm.android.db.DbHelper
+import com.matmik.mapalarm.android.model.Alarm
 
 class AlarmListFragment: DialogFragment(),RefreshableContainer{
 
@@ -29,16 +30,18 @@ class AlarmListFragment: DialogFragment(),RefreshableContainer{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dbHelper = DbHelper(activity!!)
-        refreshTb()
+        refreshTb(null)
     }
 
-    override fun refreshTb(){
+    override fun refreshTb(alarm: Alarm?){
         /*val view = findViewById<TextView>(R.id.output)
         var text = ""
         for (alarm in dbHelper.getAllAlarms())
             text += alarm.toString() + "\n"
         view.text = text*/
         val layout = view!!.findViewById<LinearLayout>(R.id.contentRoot)
+        val fragment = this.activity!!.supportFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment
+        if (alarm != null && alarm.locationBound) fragment.refreshMarkers(alarm)
         layout.removeAllViews()
         for (alarm in dbHelper.getAllAlarms()){
             val alarmCard = AlarmCard(alarm, this, activity)

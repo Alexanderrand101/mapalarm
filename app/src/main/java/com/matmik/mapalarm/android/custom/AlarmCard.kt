@@ -25,7 +25,7 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
         when(v?.id){
             R.id.delete_alarm_btn ->{
                 MapAlarmManager.deleteAndUnschedule(v.context.applicationContext, alarm, dbHelper)
-                refreshableContainer.refreshTb()
+                refreshableContainer.refreshTb(alarm)
             }
             R.id.alarm_active_btn ->{
                 alarm.active = !alarm.active

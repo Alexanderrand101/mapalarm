@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             val alarmListFragment =
                 supportFragmentManager.findFragmentById(R.id.alarm_list_fragment) as AlarmListFragment
-            alarmListFragment.refreshTb()
+            alarmListFragment.refreshTb(null)
         }
     }
 

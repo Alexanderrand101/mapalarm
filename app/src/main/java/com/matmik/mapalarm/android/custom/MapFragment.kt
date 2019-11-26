@@ -133,7 +133,8 @@ class MapFragment : Fragment() {
             val longt = it.location.split(",")[1].toDouble()
             val marker = Marker(map)
             marker.position = GeoPoint(latid, longt)
-            marker.infoWindow = AlarmInfoWindow(R.layout.alarm_info_window, map!!, it)
+            marker.infoWindow = AlarmInfoWindow(R.layout.alarm_info_window,
+                this.activity!!.supportFragmentManager.findFragmentById(R.id.alarm_list_fragment) as RefreshableContainer? ,map!!, it)
             map!!.overlays.add(marker)
         }
 
@@ -188,6 +189,16 @@ class MapFragment : Fragment() {
         if (lastLoc != null) {
             outState.putDouble("lastlat", lastLoc!!.latitude)
             outState.putDouble("lastlong", lastLoc!!.longitude)
+        }
+    }
+
+    fun refreshMarkers(alarm: Alarm?){
+        if (map != null) {
+            val marker =
+                map!!.overlays.find { it is Marker && it.infoWindow is AlarmInfoWindow && (it.infoWindow as AlarmInfoWindow).alarm == alarm} as Marker
+            marker.infoWindow.close()
+            map!!.overlays.remove(marker)
+            map!!.invalidate()//force refresh
         }
     }
 }

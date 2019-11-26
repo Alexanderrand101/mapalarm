@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_alarm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:onClick="onClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_add" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,13 +70,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
             <org.osmdroid.views.MapView
                 android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="684dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1">
 
             </org.osmdroid.views.MapView>
@@ -119,15 +129,6 @@
 
             </RelativeLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_alarm_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:onClick="onClick"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_add" />
         </FrameLayout>
     </LinearLayout>
 
