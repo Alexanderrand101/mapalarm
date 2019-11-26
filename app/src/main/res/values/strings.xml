@@ -23,4 +23,5 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="location">Coordinates</string>
+    <string name="coord_err">Location is not set</string>
 </resources>
