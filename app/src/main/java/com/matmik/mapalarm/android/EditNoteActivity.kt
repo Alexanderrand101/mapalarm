@@ -136,7 +136,7 @@ class EditNoteActivity : AppCompatActivity(),View.OnClickListener {
                 }
                 val latid = alarm.location.split(",")[0].toDouble()
                 val longt = alarm.location.split(",")[1].toDouble()
-                GlobalVariables.items.add(OverlayItem(alarm.id.toString(), alarm.name, alarm.description, GeoPoint(latid, longt)))
+                //GlobalVariables.items.add(OverlayItem(alarm.id.toString(), alarm.name, alarm.description, GeoPoint(latid, longt)))
                 val editIntent = Intent(this, MainActivity::class.java)
                 startActivity(editIntent)
             }

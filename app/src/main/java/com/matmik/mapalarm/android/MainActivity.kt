@@ -25,6 +25,7 @@ import com.matmik.mapalarm.android.config.LocaleManager
 import com.matmik.mapalarm.android.custom.AlarmCard
 import com.matmik.mapalarm.android.custom.AlarmListFragment
 import com.matmik.mapalarm.android.custom.MapFragment
+import com.matmik.mapalarm.android.custom.OptionsFragment
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
@@ -71,11 +72,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             setTitle(info.labelRes)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    //override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+        //menuInflater.inflate(R.menu.menu_main, menu)
+        //return true
+    //}
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -134,13 +135,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val id = dbHelper.getAllAlarms().map { it.id }.maxBy { it }
                 dbHelper.deleteAlarm(id!!)
             }*/*/
+            R.id.signOutButton -> {
+                FirebaseAuth.getInstance().signOut()
+                val start = Intent(this, LoginActivity::class.java)
+                startActivity(start)
+            }
             R.id.imageButton ->{
                 val dialog = AlarmListFragment()
                 dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme)
                 dialog.show(supportFragmentManager, "dialog")
             }
             R.id.imageButton2 -> {
-                openOptionsMenu()
+                val dialog = OptionsFragment()
+                //dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme)
+                dialog.show(supportFragmentManager, "dialog")
             }
         }
         refreshTb()
