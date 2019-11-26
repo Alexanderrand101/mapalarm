@@ -12,8 +12,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.matmik.mapalarm.android.EditNoteActivity
-import com.matmik.mapalarm.android.GlobalVariables
+//import com.matmik.mapalarm.android.GlobalVariables
 import com.matmik.mapalarm.android.R
+import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import com.matmik.mapalarm.android.model.Options
 import org.osmdroid.config.Configuration
@@ -21,10 +22,7 @@ import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.views.MapView
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.overlay.ItemizedIconOverlay
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
-import org.osmdroid.views.overlay.MapEventsOverlay
-import org.osmdroid.views.overlay.OverlayItem
+import org.osmdroid.views.overlay.*
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import java.util.*
@@ -110,20 +108,30 @@ class MapFragment:Fragment() {
 
         }
         map!!.overlays.add(MapEventsOverlay(mRecive))
-        val obj = object: ItemizedIconOverlay.OnItemGestureListener<OverlayItem>{
+        //val obj = object: ItemizedIconOverlay.OnItemGestureListener<OverlayItem>{
 
-            override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
-                return true
-            }
+            //override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                //return true
+            //}
 
-            override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
-                return false
-            }
+            //override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
+                //return false
+            //}
 
+        //}
+
+        DbHelper(this.activity!!.applicationContext).getAllAlarms().filter { it.locationBound }.forEach {
+            val latid = it.location.split(",")[0].toDouble()
+            val longt = it.location.split(",")[1].toDouble()
+            val marker = Marker(map)
+            marker.position = GeoPoint(latid, longt)
+            marker.infoWindow = AlarmInfoWindow(R.layout.alarm_info_window, map!!, it)
+            map!!.overlays.add(marker)
         }
-        val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(GlobalVariables.items, obj, context)
-        mOverlay.setFocusItemsOnTap(true);
-        map!!.overlays.add(mOverlay)
+
+        //val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(GlobalVariables.items, obj, context)
+        //mOverlay.setFocusItemsOnTap(true);
+        //map!!.overlays.add(mOverlay)
 
         if(ContextCompat.checkSelfPermission(this.activity!!.applicationContext, android.Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {

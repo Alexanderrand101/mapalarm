@@ -1,5 +1,6 @@
 package com.matmik.mapalarm.android.custom
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ class AlarmListFragment: DialogFragment(),RefreshableContainer{
         savedInstanceState: Bundle?
     ): View? {
         dialog?.window?.setGravity(Gravity.TOP or Gravity.LEFT)
+        dialog?.setCanceledOnTouchOutside(true)
         return inflater.inflate(R.layout.alarm_list_fragment, container,false)
     }
 
