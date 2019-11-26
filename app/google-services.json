@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "401014736053",
-    "firebase_url": "https://mapalarm-ee12a.firebaseio.com",
-    "project_id": "mapalarm-ee12a",
-    "storage_bucket": "mapalarm-ee12a.appspot.com"
+    "project_number": "314461928299",
+    "firebase_url": "https://mapscreen-cc182.firebaseio.com",
+    "project_id": "mapscreen-cc182",
+    "storage_bucket": "mapscreen-cc182.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:401014736053:android:1c32b14d46d5491bb5aafc",
+        "mobilesdk_app_id": "1:314461928299:android:4604463db202d8036c6a2e",
         "android_client_info": {
           "package_name": "com.matmik.mapalarm.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "401014736053-v1v6g4j158g3f7umfhufrdaurn6tca7b.apps.googleusercontent.com",
+          "client_id": "314461928299-m057ni0dp6a4ftctsko293ps9s4bk0uf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.matmik.mapalarm.android",
+            "certificate_hash": "d54a46d9bd375512371101650aff42ebe0d8eb74"
+          }
+        },
+        {
+          "client_id": "314461928299-7oub6gkipr2ft5pc0906k86aks7hrvcc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyChfRTviZf4YUuZ3o3bxt2JZGBhvUxM0pk"
+          "current_key": "AIzaSyAK00ErnAIhzgII0v1X4GnOWagDz7gX6aY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "401014736053-v1v6g4j158g3f7umfhufrdaurn6tca7b.apps.googleusercontent.com",
+              "client_id": "314461928299-7oub6gkipr2ft5pc0906k86aks7hrvcc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
