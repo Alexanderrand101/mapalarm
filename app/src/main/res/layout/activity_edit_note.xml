@@ -14,8 +14,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="onClick"
         android:foreground="@drawable/ic_baseline_check"
+        android:onClick="onClick"
         app:layout_anchor="@+id/scrollView2"
         app:layout_anchorGravity="end|bottom" />
 
@@ -192,6 +192,18 @@
                 android:layout_marginBottom="8pt"
                 android:text="@string/located" />
 
+            <TextView
+                android:id="@+id/location"
+                style="@android:style/Widget.Material.TextView.SpinnerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginRight="16pt"
+                android:layout_marginBottom="8pt"
+                android:onClick="onClick"
+                android:text="TextView" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="214dp"
@@ -212,14 +224,7 @@
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
         </LinearLayout>
-    </ScrollView>
+</ScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
