@@ -15,6 +15,7 @@ import com.matmik.mapalarm.android.alarm.MapAlarmManager
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
 import kotlinx.android.synthetic.main.alarm_card_content.view.*
+import org.osmdroid.util.GeoPoint
 
 class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     ConstraintLayout(context, attrs, defStyleAttr), View.OnClickListener {
@@ -36,6 +37,14 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
                 editIntent.putExtra("EditableNote",alarm)
                 startActivity(v.context, editIntent, null)
             }
+            R.id.snap_to_location_btn->{
+                if (alarm.locationBound == true){
+                    val latid = alarm.location.split(",")[0].toDouble()
+                    val longt = alarm.location.split(",")[1].toDouble()
+                    val point = GeoPoint(latid, longt)
+                    refreshableContainer.snapToLoc(point)
+                }
+            }
         }
     }
 
@@ -52,6 +61,7 @@ class AlarmCard(var alarm:Alarm, val refreshableContainer: RefreshableContainer,
         alarm_active_btn.setOnClickListener(this)
         delete_alarm_btn.setOnClickListener(this)
         edit_alarm_btn.setOnClickListener(this)
+        locationBound.setOnClickListener(this)
         if (alarm.locationBound) locationBound.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_location_on))
         else locationBound.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_location_off))
     }

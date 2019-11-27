@@ -17,8 +17,10 @@ object MapAlarmManager {
         val alarmIntent : PendingIntent =
             Intent(context, MapAlarmReciver::class.java)
                 .let { intent ->
-                    intent.putExtra("alarm", alarm)
-                    PendingIntent.getBroadcast(context, alarm.id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                    intent.putExtra("alarmName", alarm.name)
+                    intent.putExtra("alarmId", alarm.id)
+                    if (alarm.locationBound) intent.putExtra("alarmLoc", alarm.location)
+                    PendingIntent.getBroadcast(context, alarm.id.toInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT)
                 }
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()

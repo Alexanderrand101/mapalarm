@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.matmik.mapalarm.android.R
 import com.matmik.mapalarm.android.db.DbHelper
 import com.matmik.mapalarm.android.model.Alarm
+import org.osmdroid.util.GeoPoint
 
 class AlarmListFragment: DialogFragment(),RefreshableContainer{
 
@@ -48,5 +49,10 @@ class AlarmListFragment: DialogFragment(),RefreshableContainer{
             alarmCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { bottomMargin = 8 }
             layout.addView(alarmCard)
         }
+    }
+
+    override fun snapToLoc(point: GeoPoint) {
+        val fragment = this.activity!!.supportFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment
+        fragment.snapToLoc(point)
     }
 }

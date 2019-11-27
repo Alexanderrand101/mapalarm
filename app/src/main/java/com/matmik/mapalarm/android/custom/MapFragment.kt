@@ -2,6 +2,7 @@ package com.matmik.mapalarm.android.custom
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,8 @@ import org.osmdroid.views.MapView
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.*
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
+import org.osmdroid.views.overlay.mylocation.IMyLocationConsumer
+import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import java.util.*
 import java.util.jar.Manifest
@@ -200,5 +203,9 @@ class MapFragment : Fragment() {
             map!!.overlays.remove(marker)
             map!!.invalidate()//force refresh
         }
+    }
+
+    fun snapToLoc(point: GeoPoint){
+        map!!.controller.animateTo(point)
     }
 }
